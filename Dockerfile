@@ -1,14 +1,12 @@
-FROM gliderlabs/alpine
+FROM hypriot/rpi-golang 
 
-MAINTAINER Chris Aubuchon <Chris.Aubuchon@gmail.com>
+MAINTAINER Tobias Stevenson <codenamekt@gmail.com> 
 
-COPY . /go/src/github.com/CiscoCloud/consul-cli
-RUN apk add --update go git mercurial \
-	&& cd /go/src/github.com/CiscoCloud/consul-cli \
+COPY . /go/src/github.com/TheRaspBin/consul-cli
+RUN cd /go/src/github.com/TheRaspBin/consul-cli \
 	&& export GOPATH=/go \
 	&& go get \
 	&& go build -o /bin/consul-cli \
-	&& rm -rf /go \
-	&& apk del --purge go git mercurial
+	&& rm -rf /go
 
-ENTRYPOINT [ "/bin/consul-cli" ]
+#ENTRYPOINT [ "/bin/consul-cli" ]
